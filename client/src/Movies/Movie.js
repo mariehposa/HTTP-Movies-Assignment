@@ -53,7 +53,9 @@ export default class Movie extends React.Component {
         <div className="save-button" onClick={this.saveMovie}>Save</div>
 
         <NavLink to={`/update-movie/${this.props.match.params.id}`}>
-        <button className="edit-button" onClick={() => this.props.setMovieId(this.state.movie.id)}>Edit</button>
+        <button className="edit-button" onClick={() => {
+          this.props.setMovieForm(this.state.movie)
+        }}>Edit</button>
         </NavLink>
 
         <button className="delete-button" onClick={() => this.deleteMovie(this.state.movie.id)}>Delete</button>
