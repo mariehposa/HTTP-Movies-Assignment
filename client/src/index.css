@@ -67,8 +67,17 @@ body {
   right: 25px;
   border: 1px solid grey;
   padding: 5px 15px;
-  background-color: red;
+  background-color: green;
   color: white;
+}
+
+.delete-button {
+  position: absolute;
+  top: 150px;
+  right: 25px;
+  border: 1px solid grey;
+  padding: 5px 15px;
+  background-color: red;
 }
 
 .save-button:hover {

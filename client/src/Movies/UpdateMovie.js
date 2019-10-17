@@ -29,7 +29,7 @@ export default function UpdateMovie(props) {
             )
             .then(res => {
                 props.setMovieId(null)
-                props.history.push('/');
+                props.history.push(`/movies/${id}`);
             })
             .catch(err => {
                 // console.log(err.message)
