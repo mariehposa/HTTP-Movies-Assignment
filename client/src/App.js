@@ -6,7 +6,7 @@ import Movie from "./Movies/Movie";
 import UpdateMovie from './Movies/UpdateMovie'
 import axios from 'axios';
 
-const updateUrl = 'http://localhost:5000/api/movies'
+const url = 'http://localhost:5000/api/movies'
 
 const initialMovieForm = {
   title: '',
@@ -24,28 +24,45 @@ const App = (props) => {
     setSavedList([...savedList, movie]);
   };
 
-  const onUpdateMovie = (formValues, actions) => {        
-    const id =movieForm.id
+  const onUpdateMovie = (formValues, actions) => {
+    const id = movieForm.id
     console.log(formValues);
-    
+
     axios
-        .put(`${updateUrl}/${id}`,
-            {
-                id: id,
-                title: formValues.title,
-                director: formValues.director,
-                metascore: formValues.metascore,
-                stars: formValues.stars.split(',')
-            }
-        )
-        .then(res => {
-            props.history.push('/');
-        })
-        .catch(err => {
-            // console.log(err.message)
-            console.log(err);
-        })
+      .put(`${url}/${id}`,
+        {
+          id: id,
+          title: formValues.title,
+          director: formValues.director,
+          metascore: formValues.metascore,
+          stars: formValues.stars.split(',')
+        }
+      )
+      .then(res => {
+        props.history.push('/');
+      })
+      .catch(err => {
+        // console.log(err.message)
+        console.log(err);
+      })
     actions.resetForm()
+  }
+
+  const onAddMovie = (formValues, actions) => {
+    axios.post(url, {
+      title: formValues.title,
+      director: formValues.director,
+      metascore: formValues.metascore,
+      stars: formValues.stars.split(',')
+      })
+      .then(res => {
+        console.log(res.data)
+        props.history.push('/')
+      })
+      .catch(err => {
+        console.log(err)
+      })
+      actions.resetForm()
   }
 
   return (
@@ -58,15 +75,15 @@ const App = (props) => {
           return <Movie {...props} setMovieForm={setMovieForm} addToSavedList={addToSavedList} />;
         }}
       />
-      <Route 
-        path="/update-movie/:id" 
-        render={ props => {
+      <Route
+        path="/update-movie/:id"
+        render={props => {
           return <UpdateMovie {...props} form={movieForm} onSubmit={onUpdateMovie} />
         }}
       />
-      <Route path="/add-movie" render={ props => {
-        return <UpdateMovie  {...props} form={initialMovieForm} />
-      }}/>
+      <Route path="/add-movie" render={props => {
+        return <UpdateMovie  {...props} form={initialMovieForm} onSubmit={onAddMovie} />
+      }} />
     </>
   );
 };
