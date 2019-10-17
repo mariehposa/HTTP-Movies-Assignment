@@ -45,9 +45,9 @@ export default class Movie extends React.Component {
           Save
         </div>
         <NavLink to={`/update-movie/${this.props.match.params.id}`}>
-        <div className="edit-button">
+        <button className="edit-button" onClick={() => this.props.setMovieId(this.state.movie.id)}>
           Edit
-        </div>
+        </button>
         </NavLink>
       </div>
     );
