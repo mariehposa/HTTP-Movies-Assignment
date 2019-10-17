@@ -25,7 +25,9 @@ export default class Movie extends React.Component {
     axios
       .get(`http://localhost:5000/api/movies/${id}`)
       .then(res => this.setState({ movie: res.data }))
-      .catch(err => console.log(err.response));
+      .catch(err => {
+        // console.log(err.response)
+      });
   };
 
   saveMovie = () => {
@@ -50,7 +52,7 @@ export default class Movie extends React.Component {
 
         <MovieCard movie={this.state.movie} />
 
-        <div className="save-button" onClick={this.saveMovie}>Save</div>
+        <button className="save-button" onClick={this.saveMovie}>Save</button>
 
         <NavLink to={`/update-movie/${this.props.match.params.id}`}>
         <button className="edit-button" onClick={() => {

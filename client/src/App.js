@@ -26,7 +26,7 @@ const App = (props) => {
 
   const onUpdateMovie = (formValues, actions) => {
     const id = movieForm.id
-    console.log(formValues);
+    // console.log(formValues);
 
     axios
       .put(`${url}/${id}`,
@@ -43,7 +43,7 @@ const App = (props) => {
       })
       .catch(err => {
         // console.log(err.message)
-        console.log(err);
+        alert(err.message)
       })
     actions.resetForm()
   }
@@ -56,11 +56,11 @@ const App = (props) => {
       stars: formValues.stars.split(',')
       })
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         props.history.push('/')
       })
       .catch(err => {
-        console.log(err)
+        // console.log(err)
       })
       actions.resetForm()
   }
